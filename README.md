@@ -1,24 +1,36 @@
 # Webpack Template
 
-Минимальный шаблон JavaScript-проекта с настроенным окружением для разработки, тестирования и автоматических проверок.
+Готовый шаблон JavaScript-проекта с настроенным окружением для сборки, тестирования, линтинга и автоматических проверок на GitHub.
+
+Репозиторий настроен как **GitHub Template Repository** и предназначен для быстрого создания новых учебных JavaScript-проектов.
 
 ## Что входит
 
-- Webpack
-- Babel
-- Core-js
-- Jest
-- ESLint
-- Husky
-- GitHub Actions CI
-- Dependabot
-- CodeQL
-- EditorConfig
-- Browserslist
+- **Webpack 5** — development- и production-сборка;
+- **Babel 8** — транспиляция JavaScript;
+- **Core-js** — полифиллы;
+- **Jest 30** — тестирование и отчёт о покрытии;
+- **ESLint 10** — статический анализ кода;
+- **Husky 9** — проверки перед коммитом;
+- **GitHub Actions** — CI для `push` и `pull_request` в `main`;
+- **Dependabot** — автоматическая проверка обновлений зависимостей;
+- **Browserslist** — список поддерживаемых браузеров;
+- **EditorConfig** — единые настройки форматирования файлов;
+- **Git attributes** — нормализация текстовых файлов;
+- **MIT License**.
 
-## Начало работы
+CodeQL для этого репозитория включён через GitHub **default setup**.
 
-Создайте новый репозиторий на основе этого шаблона, затем клонируйте его:
+## Требования
+
+- Node.js 26
+- npm
+
+## Использование шаблона
+
+На странице репозитория нажмите **Use this template → Create a new repository**.
+
+После создания нового репозитория клонируйте его:
 
 ```bash
 git clone https://github.com/USERNAME/PROJECT-NAME.git
@@ -31,49 +43,86 @@ cd PROJECT-NAME
 npm install
 ```
 
-После создания проекта измените его имя в `package.json`:
+После этого замените `PROJECT-NAME` в `package.json` на имя нового проекта. Также обновите ссылки в полях:
 
-```json
-{
-  "name": "PROJECT-NAME"
-}
+- `repository.url`;
+- `bugs.url`;
+- `homepage`.
+
+Основной файл проекта:
+
+```text
+src/index.js
 ```
 
 ## Команды
 
-### Сборка для разработки
+| Команда | Назначение |
+| --- | --- |
+| `npm run dev` | Development-сборка |
+| `npm run prod` | Production-сборка |
+| `npm test` | Запуск Jest |
+| `npm run coverage` | Запуск Jest с отчётом о покрытии |
+| `npm run lint` | Проверка ESLint |
 
-```bash
-npm run dev
+Production-сборка создаётся в директории `dist/`.
+
+## Тестирование
+
+Jest собирает покрытие для JavaScript-файлов внутри `src/`, исключая тесты из `__tests__`.
+
+Для покрытия строк установлен глобальный порог:
+
+```text
+100%
 ```
 
-### Production-сборка
+Названия отдельных тестов выводятся благодаря `verbose: true`.
+
+> В самом шаблоне тестов нет. Поэтому `npm test` и `npm run coverage` завершаются с ошибкой `No tests found`, пока в созданный проект не будет добавлен хотя бы один тест.
+
+## Husky
+
+Перед каждым коммитом выполняются:
 
 ```bash
+npm test && npm run lint
+```
+
+Это позволяет не отправлять в репозиторий изменения с падающими тестами или ошибками ESLint.
+
+## CI
+
+Workflow `.github/workflows/node-ci.yml` запускается при:
+
+- `push` в `main`;
+- `pull_request` в `main`.
+
+CI выполняет:
+
+```text
+npm ci
+npm run coverage
+npm run lint
 npm run prod
 ```
 
-Готовая сборка создаётся в директории `dist`.
+В GitHub Actions используется Node.js 26. Husky в CI отключён через `HUSKY=0`, поскольку необходимые проверки запускаются отдельными шагами workflow.
 
-### Запуск тестов
+## Dependabot
 
-```bash
-npm test
-```
+Dependabot проверяет обновления:
 
-### Проверка покрытия тестами
+- npm-зависимостей — **раз в неделю**;
+- GitHub Actions — **раз в месяц**.
 
-```bash
-npm run coverage
-```
+## CodeQL
 
-### Проверка ESLint
+В этом репозитории CodeQL работает через **GitHub default setup**, поэтому отдельного файла CodeQL workflow в `.github/workflows/` нет.
 
-```bash
-npm run lint
-```
+После создания нового проекта из шаблона рекомендуется проверить **Settings → Security → Code security**, если CodeQL нужен и в новом репозитории.
 
-## Структура проекта
+## Структура
 
 ```text
 .
@@ -89,30 +138,23 @@ npm run lint
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
+├── .prettierignore
 ├── babel.config.js
 ├── eslint.config.js
 ├── jest.config.js
 ├── package.json
-└── webpack.config.js
+├── webpack.config.js
+├── LICENSE
+└── README.md
 ```
 
-## CI
+## Дополнительно
 
-GitHub Actions автоматически запускает проверки при `push` и `pull request` в ветку `main`:
-
-```text
-npm ci
-npm run coverage
-npm run lint
-npm run prod
-```
-
-## Обновление зависимостей
-
-Dependabot автоматически проверяет обновления:
-
-- npm-зависимостей — раз в неделю;
-- GitHub Actions — раз в месяц.
+- `dist/`, `coverage/` и `node_modules/` исключены из Git;
+- ESLint игнорирует `dist/` и `coverage/`;
+- `.gitattributes` содержит `* text=auto` для нормализации текстовых файлов;
+- Browserslist использует конфигурацию `defaults`;
+- `.prettierignore` присутствует, но **Prettier сейчас не установлен** в зависимостях шаблона.
 
 ## Лицензия
 
