@@ -1,5 +1,9 @@
 # Webpack Template
 
+[![Node.js CI](https://github.com/potykalov/webpack-template/actions/workflows/node-ci.yml/badge.svg)](https://github.com/potykalov/webpack-template/actions/workflows/node-ci.yml)
+[![CodeQL](https://github.com/potykalov/webpack-template/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/potykalov/webpack-template/actions/workflows/github-code-scanning/codeql)
+[![Dependabot Updates](https://github.com/potykalov/webpack-template/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/potykalov/webpack-template/actions/workflows/dependabot/dependabot-updates)
+
 Шаблон JavaScript-проекта с готовым окружением для сборки, тестирования, линтинга и автоматических проверок.
 
 Репозиторий настроен как **GitHub Template Repository** и предназначен для быстрого создания новых учебных JavaScript-проектов.
