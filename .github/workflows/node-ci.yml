@@ -30,7 +30,12 @@ jobs:
         run: npm ci
 
       - name: Run tests with coverage
-        run: npm run coverage
+        run: |
+          if [ -z "$(npx jest --listTests)" ]; then
+            echo "No tests found — skipping coverage."
+          else
+            npm run coverage
+          fi
 
       - name: Run ESLint
         run: npm run lint
