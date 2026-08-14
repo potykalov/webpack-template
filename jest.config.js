@@ -21,7 +21,7 @@ const config = {
   collectCoverage: false,
 
   // Массив glob-шаблонов файлов, для которых необходимо собирать покрытие
-  collectCoverageFrom: ["src/js/**/*.js"],
+  collectCoverageFrom: ["src/**/*.js", "!src/**/__tests__/**"],
 
   // Каталог, в который Jest должен сохранять отчёты о покрытии
   coverageDirectory: "coverage",
