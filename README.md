@@ -11,6 +11,8 @@
 ## Инструменты
 
 - **Webpack 5** — development- и production-сборка
+- **Webpack Dev Server** — локальный сервер с горячим обновлением
+- **HTML, CSS, изображения и шрифты** — обработка ресурсов при сборке
 - **Babel 8** — транспиляция JavaScript
 - **Core-js** — полифиллы
 - **Jest 30** — тестирование и покрытие кода
@@ -62,6 +64,7 @@ src/index.js
 
 | Команда | Назначение |
 | --- | --- |
+| `npm start` | Сервер разработки на http://localhost:8080 |
 | `npm run dev` | Development-сборка |
 | `npm run prod` | Production-сборка |
 | `npm test` | Запуск Jest |
@@ -180,7 +183,11 @@ CodeQL включён через **GitHub default setup**, поэтому отд
 ├── .husky/
 │   └── pre-commit
 ├── src/
-│   └── index.js
+│   ├── app.js
+│   ├── index.js
+│   ├── index.html
+│   └── css/
+│       └── style.css
 ├── .browserslistrc
 ├── .editorconfig
 ├── .gitattributes
